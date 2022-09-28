@@ -1,12 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import {useState, useEffect} from "react";
+import * as API from "./services/characters";
 
 
-function App() {
-  
+export function App() {
+  const [characters, setCharacters] = useState([]);
+
+  useEffect(() => {
+    API.getAllCharacters().then(setCharacters);
+  }, []);
+
+  console.log(characters);
+
   return (
-    <div>Dragon Ball Database</div>
+    <>
+      <h1>Dragon Ball Database</h1>
+      <ul>
+        {characters.map(character=> (
+          <li key={character.id}>
+            {character.name}
+          </li>  
+        ))}
+      </ul>      
+    </>
   )
 }
 
-export default App
+
