@@ -6,7 +6,28 @@
     justify-content: center;    
 }
 
-.Card.Title{
+.CardTitle{
     margin: 5px;
 }
 
+.paginator{
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    border: 1px solid rgba(185, 184, 184, 0.822);
+    border-radius: 4px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.paginator Button{
+    margin: 2px;
+}
+
+footer{
+    background: rgb(33, 37, 41);
+    height: 40px;
+    border: 1px solid black;
+    margin-top: 10px;
+    color: #fff;
+}

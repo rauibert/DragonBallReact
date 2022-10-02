@@ -11,12 +11,31 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 export function App() {
   const [characters, setCharacters] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  
+  const filteredCharacters = () => {
+    return characters.slice (currentPage,currentPage + 12);
+  };
+
+  const nextPage = () => {
+    let finalPage = characters.length - 12;
+    if(currentPage < finalPage){
+      setCurrentPage(currentPage + 12);
+    }else{
+      console.log('No hay más paginas');
+    }    
+  };
+
+  const prevPage = () => {
+    if(currentPage>0){
+      setCurrentPage(currentPage - 12);
+    }    
+  };
+
 
   useEffect(() => {
     API.getAllCharacters().then(setCharacters);
-  }, []);
-
-  console.log(characters);
+  }, []); 
 
   return (
     <>
@@ -33,9 +52,13 @@ export function App() {
           </Container>  
         </Navbar>        
       </header>
+      <div className="paginator">
+        <Button onClick={prevPage}>Anterior</Button>        
+        <Button onClick={nextPage}>Siguiente</Button>
+      </div>
       <div className="container">
         <div className="cardContainer">
-          {characters.map(character=> (
+          {filteredCharacters().map(character=> (
               <Card style={{ width: '18rem' }} id={character.id}>
                 <Card.Img variant="top" style={{height:'55vh'}} src={character.imageUrl} />
                 
@@ -52,7 +75,12 @@ export function App() {
               </Card>               
           ))}
         </div>
-      </div>     
+      </div>  
+      <div className="paginator">
+        <Button onClick={prevPage}>Anterior</Button>        
+        <Button onClick={nextPage}>Siguiente</Button>
+      </div>
+      <footer>@Rauibert</footer>   
     </>
   )
 }
