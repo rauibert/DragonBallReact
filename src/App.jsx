@@ -1,5 +1,8 @@
 import {useState, useEffect} from "react";
 import * as API from "./services/characters";
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import logo from './assets/logo2.png';
 
 
 export function App() {
@@ -13,14 +16,28 @@ export function App() {
 
   return (
     <>
-      <h1>Dragon Ball Database</h1>
-      <ul>
-        {characters.map(character=> (
-          <li key={character.id}>
-            {character.name}
-          </li>  
-        ))}
-      </ul>      
+      <header>
+        <Navbar bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand href="#inicio">
+              <img src={ logo } 
+                width="80"
+                className="d-inline-block align-middle" 
+                alt="" />{' '}
+                Dragonball Database
+            </Navbar.Brand>
+          </Container>  
+        </Navbar>        
+      </header>
+      <div className="container">
+        <ul>
+          {characters.map(character=> (
+            <li key={character.id}>
+              {character.name}
+            </li>  
+          ))}
+        </ul> 
+      </div>     
     </>
   )
 }
