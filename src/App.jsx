@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import * as API from "./services/characters";
+import "./App.css";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from './assets/logo2.png';
@@ -33,14 +34,13 @@ export function App() {
         </Navbar>        
       </header>
       <div className="container">
-        <ul>
+        <div className="cardContainer">
           {characters.map(character=> (
-            <li key={character.id}>
-               <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={character.imageUrl} />
-                <Card.Body>
+              <Card style={{ width: '18rem' }} id={character.id}>
+                <Card.Img variant="top" style={{height:'55vh'}} src={character.imageUrl} />
+                
                   <Card.Title>{character.name}</Card.Title>
-                </Card.Body>
+                
                   <ListGroup variant="flush">
                     <ListGroup.Item>Planeta de origen: {character.originplanet}</ListGroup.Item>
                     <ListGroup.Item>Especie: {character.specie}</ListGroup.Item>
@@ -49,10 +49,9 @@ export function App() {
                 <Card.Body>                
                   <Button variant="primary">Go somewhere</Button>
                 </Card.Body>
-              </Card>   
-            </li>  
+              </Card>               
           ))}
-        </ul> 
+        </div>
       </div>     
     </>
   )

@@ -1,0 +1,12 @@
+
+.cardContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;    
+}
+
+.Card.Title{
+    margin: 5px;
+}
+
