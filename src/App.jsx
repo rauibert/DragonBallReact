@@ -3,6 +3,9 @@ import * as API from "./services/characters";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from './assets/logo2.png';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 
 export function App() {
@@ -33,7 +36,20 @@ export function App() {
         <ul>
           {characters.map(character=> (
             <li key={character.id}>
-              {character.name}
+               <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={character.imageUrl} />
+                <Card.Body>
+                  <Card.Title>{character.name}</Card.Title>
+                </Card.Body>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item>Planeta de origen: {character.originplanet}</ListGroup.Item>
+                    <ListGroup.Item>Especie: {character.specie}</ListGroup.Item>
+                    <ListGroup.Item>Role: {character.role}</ListGroup.Item>  
+                  </ListGroup>
+                <Card.Body>                
+                  <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+              </Card>   
             </li>  
           ))}
         </ul> 
