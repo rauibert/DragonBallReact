@@ -15,7 +15,6 @@ export function App() {
   const [search, setSearch] = useState('');
   
   const filteredCharacters = () => {
-
     if(search.length == 0){
       return characters.slice (currentPage,currentPage + 12);
     }else{
@@ -23,18 +22,30 @@ export function App() {
         character => character.name.toLowerCase().includes(search.toLowerCase()));
       
       return filtered.slice (currentPage,currentPage + 12);
-    }
-
-    
+    }    
   };
 
   const nextPage = () => {
     let finalPage = characters.length - 12;
-    if(currentPage < finalPage){
-      setCurrentPage(currentPage + 12);
+    let numCharactersFiltered = characters.filter(character => character.name.includes(search)).length;
+
+    console.log(numCharactersFiltered);
+    console.log(currentPage);
+
+    if(search){
+      let finalPageSearch = numCharactersFiltered -12;
+      if(currentPage < finalPageSearch){
+        setCurrentPage(currentPage + 12);
+      } else {
+        console.log('No hay más paginas');
+      }  
     }else{
-      console.log('No hay más paginas');
-    }    
+      if(currentPage < finalPage){
+        setCurrentPage(currentPage + 12);
+      } else {
+        console.log('No hay más paginas');
+      }  
+    }      
   };
 
   const prevPage = () => {
@@ -87,10 +98,10 @@ export function App() {
       <div className="container">
         <div className="cardContainer">
           {filteredCharacters().map(character=> (
-              <Card style={{ width: '18rem' }} id={character.id}>
+              <Card style={{ width: '18rem', margin: '2px', padding: '4px' }} id={character.id}>
                 <Card.Img variant="top" style={{height:'55vh'}} src={character.imageUrl} />
                 
-                  <Card.Title>{character.name}</Card.Title>
+                  <Card.Title>{character.id}. {character.name}</Card.Title>
                 
                   <ListGroup variant="flush">
                     <ListGroup.Item>Planeta de origen: {character.originplanet}</ListGroup.Item>
