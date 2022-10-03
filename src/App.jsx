@@ -12,9 +12,20 @@ import ListGroup from 'react-bootstrap/ListGroup';
 export function App() {
   const [characters, setCharacters] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [search, setSearch] = useState('');
   
   const filteredCharacters = () => {
-    return characters.slice (currentPage,currentPage + 12);
+
+    if(search.length == 0){
+      return characters.slice (currentPage,currentPage + 12);
+    }else{
+      const filtered = characters.filter(
+        character => character.name.toLowerCase().includes(search.toLowerCase()));
+      
+      return filtered.slice (currentPage,currentPage + 12);
+    }
+
+    
   };
 
   const nextPage = () => {
@@ -30,6 +41,11 @@ export function App() {
     if(currentPage>0){
       setCurrentPage(currentPage - 12);
     }    
+  };
+
+  const onSearchChange = (event) => {
+    setCurrentPage(0);
+    setSearch(event.target.value);
   };
 
 
@@ -52,9 +68,21 @@ export function App() {
           </Container>  
         </Navbar>        
       </header>
+     
       <div className="paginator">
-        <Button onClick={prevPage}>Anterior</Button>        
-        <Button onClick={nextPage}>Siguiente</Button>
+        <div className="busqueda">
+          <input 
+            type="text"
+            id="search" 
+            placeholder="Buscar personaje"
+            value = { search }
+            onChange = { onSearchChange }
+          />
+        </div><br/>
+        <div className="botones">
+          <Button onClick={prevPage}>Anterior</Button>        
+          <Button onClick={nextPage}>Siguiente</Button>
+        </div>       
       </div>
       <div className="container">
         <div className="cardContainer">
